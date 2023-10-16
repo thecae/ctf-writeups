@@ -4,8 +4,8 @@
 
 ## forensics
 
-* [\[Amateurs '23\] 1black0white](forensics/amateurs-23-1black0white.md)
-* [\[CSAW '23\] Screenshot Guesser](forensics/csaw-23-screenshot-guesser.md)
+* [\[CSAW '23\] 1black0white](forensics/csaw-23-1black0white.md)
+* [\[Amateurs '23\] Screenshot Guesser](forensics/amateurs-23-screenshot-guesser.md)
 
 ## pwn
 
