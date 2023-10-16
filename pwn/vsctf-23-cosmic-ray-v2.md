@@ -6,9 +6,7 @@ description: An interesting twist on a past CTF challenge.
 
 This challenge is a twist on the [Cosmic Ray](https://ctftime.org/task/16654) challenge from [CSAW '23](https://ctftime.org/event/1311). The original challenge was a simple buffer overflow, but this version removes the overflow opportunity.
 
-## \[vsCTF '23] Cosmic Ray v2
-
-### Distribution
+## Distribution
 
 We are provided a binary file, `cosmicrayv2`. Running some basic information on the file:
 
@@ -25,7 +23,7 @@ $ checksec cosmicrayv2
     PIE:      No PIE (0x400000)
 ```
 
-### Solution
+## Solution
 
 I will use `radare2` and Ghidra for the dissection of this challenge.
 
@@ -79,7 +77,7 @@ What does this function do for us? This function lets us input a memory address 
 Simply based on the solution of the original Cosmic Ray challenge, we know we must modify an instruction. The original solution modified the canary check instruction to jump if there _wasn't_ a buffer overflow. This won't work because we don't get another input once we're done. We need to find another instruction to modify.
 {% endhint %}
 
-#### Inspiration
+### Inspiration
 
 I started modifying random instructions after the flip to affect the program's flow. I recognized that `cosmic_ray()` comes right before `main()`, which was a big clue. If I could modify the `ret` instruction so that it no longer returned, the program would continue executing through `main()`, giving me another run of the binary.
 
@@ -87,7 +85,7 @@ What do I change `ret` to? As it is, `ret` is `c3` in hex, which is `11000011` i
 
 Now that we can run the program infinitely, we can continue to modify single bits until we do something. We can clearly see we must get a shell.
 
-#### Attack Vector
+### Attack Vector
 
 We know we must call `ssytem()`. We don't know if ASLR is turned on, but we'll assume it is. This makes Step 1 **to leak `libc`**. From here, we can use the following code as the basis for our next steps:
 
@@ -124,12 +122,12 @@ More information on the GOT Overwrite exploit can be found here: https://cyber.c
 To make this happen, we need to find a way to load `/bin/sh` into `rdi`. There already is an instruction to load `0x1` into `edi` before the call to `exit()`, so we must modify this instruction through consecutive bit-flipping.
 
 {% hint style="warning" %}
-#### How I found the Solution...
+### How I found the Solution...
 
 A bit of dumb luck managed to carry me through this. While I was stepping through the possibilities of changing the instruction through `gdb`, I noticed my input was sitting in `rdx` at the time of the `mov edi, 1` instruction. This inspired me to change this instruction to `mov edi, edx`.
 {% endhint %}
 
-#### Solution
+### Solution
 
 We can now put together our solution. Our solution comes in a few stages:
 
@@ -239,7 +237,7 @@ We can write the rest of our exploit now that we have these helper functions. Ge
 
 If we run this, we get a shell and the flag!
 
-### Full Exploit
+## Full Exploit
 
 {% code title="exploit.py" lineNumbers="true" %}
 ```python
