@@ -5,10 +5,11 @@ description: Converting Binary Data into a QR code.
 # \[CSAW '23] 1black0white
 
 ## Distribution
+
 We were provided a data file with some decimal data.
 
 {% code title="data.txt" lineNumbers="true" %}
-```text
+```
 533258111
 274428993
 391005533
@@ -43,11 +44,12 @@ We were provided a data file with some decimal data.
 
 ## Solution
 
-Based on the challenge title, I knew I wanted to use the data to visualize a QR code, where $$1$$ is black and $$0$$ is white.  There were some initial issues with this approach:
+Based on the challenge title, I knew I wanted to use the data to visualize a QR code, where $$1$$ is black and $$0$$ is white. There were some initial issues with this approach:
+
 * The data was in decimal, not binary
 * Not all the lines were the same length.
 
-We can fix this by first converting the data to binary and then padding the lines until they are all the same length.  It turns out the longest line is $$29$$ binary digits long, so we can pad to this length.
+We can fix this by converting the data to binary and then padding the lines until they are all the same length. It turns out the longest line is $$29$$ binary digits long so we can pad to this length.
 
 ```python
 data = open('data.txt').read().strip().split()
@@ -66,12 +68,13 @@ for x in range(size):
 ```
 
 To ensure my phone could scan the image, I resized it to be $$10$$ times the original size.
+
 ```python
 large = img.resize((10 * size, 10 * size))
 large.show()
 ```
 
-Ths generates an image, that when we scan it, gives us the flag.
+This generates an image that gives us the flag when we scan it.
 
 ## Full Solution
 
