@@ -4,7 +4,7 @@ description: An interesting twist on a past CTF challenge.
 
 # \[vsCTF '23] Cosmic Ray v2
 
-This challenge is a twist on the [Cosmic Ray](https://ctftime.org/task/16654) challenge from [CSAW '23](https://ctftime.org/event/1311). The original challenge was a simple buffer overflow, but this version removes the overflow opportunity.
+This challenge is a twist on the [Cosmic Ray](https://ctftime.org/task/26227) challenge from [Sekai CTF '23](https://ctftime.org/event/1923). The original challenge was a simple buffer overflow, but this version removes the overflow opportunity.
 
 ## Distribution
 
