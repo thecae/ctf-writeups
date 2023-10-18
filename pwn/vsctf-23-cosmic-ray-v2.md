@@ -87,7 +87,7 @@ Now that we can run the program infinitely, we can continue to modify single bit
 
 ### Attack Vector
 
-We know we must call `ssytem()`. We don't know if ASLR is turned on, but we'll assume it is. This makes Step 1 **to leak `libc`**. From here, we can use the following code as the basis for our next steps:
+We know we must call `system()`. We don't know if ASLR is turned on, but we'll assume it is. This makes Step 1 **to leak `libc`**. From here, we can use the following code as the basis for our next steps:
 
 ```as
 │           0x00401543      8b45cc         mov eax, dword [var_34h]
