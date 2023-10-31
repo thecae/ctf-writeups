@@ -116,7 +116,7 @@ This tells us two things:
 This leads us to the **GOT Overwrite** exploit: we can overwrite the GOT entry for `exit()` with the address of `system()`. This will allow us to call `system()` with any argument we want.
 
 {% hint style="info" %}
-More information on the GOT Overwrite exploit can be found here: https://cyber.cole-ellis.com/binex/08-got/
+More information on the GOT Overwrite exploit can be found here: [https://cyber.cole-ellis.com/binex/08-got/](https://cyber.cole-ellis.com/binex/08-got/)
 {% endhint %}
 
 To make this happen, we need to find a way to load `/bin/sh` into `rdi`. There already is an instruction to load `0x1` into `edi` before the call to `exit()`, so we must modify this instruction through consecutive bit-flipping.
